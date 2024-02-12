@@ -31,13 +31,4 @@ jobs:
         name: build
         path: /home/runner/work/webapp/webapp/bin/Debug/net6.0
 
-  Download-Artifact:
-
-        runs-on: self-hosted
-        needs: build
-
-        steps:
-         - uses: actions/download-artifact@v3
-           with:
-             name: Download-artifact
-             path: D:\webapp-downloadartif
+  
