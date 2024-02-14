@@ -33,11 +33,11 @@ jobs:
 
   Download-Artifact:
 
-        runs-on: self-hosted
-        needs: build
+      runs-on: self-hosted
+      needs: build
 
-        steps:
+      steps:
          - uses: actions/download-artifact@v3
            with:
              name: build
-             path: D:\webapp-downloadartif 
+             path: D:\app-dotnetartifact
