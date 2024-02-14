@@ -42,7 +42,7 @@ jobs:
       run: |
         dotnet publish -c Release-o.\myapp
         
-    - name: dotnet publish
+    - name: Deploy-to-IIS
       shell: cmd
       run: |  
         iisreset /stop
