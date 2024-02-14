@@ -51,6 +51,7 @@ jobs:
           - uses: cschleiden/webdeploy-action@v1
             with:
               website-name: Deploy-to-IIS
+              shell: pwsh
               source-path:  D:\app-dotnetartifact\publish\wwwroot
               
           
