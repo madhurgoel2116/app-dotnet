@@ -32,24 +32,6 @@ jobs:
         name: build
         path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
 
-
-    - name: Build with dotnet
-      shell: pwsh
-      run: dotnet build --configuration Release
-
-    - name: dotnet publish
-      shell: pwsh
-      run: |
-        dotnet publish -c Release-o.\app-dotnet
-        
-    - name: Deploy-to-IIS
-      shell: pwsh
-      run: |  
-        iisreset /stop
-        xcopy /s /y .\app-dotnet\* D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
-        iisreset /start
-            
-
   Download-Artifact:
 
       runs-on: self-hosted
@@ -60,5 +42,16 @@ jobs:
            with:
              name: build
              path: D:\app-dotnetartifact
+  Deploy: 
+   
+        runs-on: self-hosted
+        needs: Download-Artifact
 
-
+        steps:
+          - uses: ChristopheLav/iis-deploy@v1.0.0
+            with:
+              website-name: Deploy-to-IIS
+              source-path:  D:\app-dotnetartifact
+              
+          
+       
