@@ -40,13 +40,13 @@ jobs:
     - name: dotnet publish
       shell: pwsh
       run: |
-        dotnet publish -c Release-o.\myapp
+        dotnet publish -c Release-o.\app-dotnet
         
     - name: Deploy-to-IIS
       shell: pwsh
       run: |  
         iisreset /stop
-        xcopy /s /y .\myapp\* D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
+        xcopy /s /y .\app-dotnet\* D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
         iisreset /start
             
 
