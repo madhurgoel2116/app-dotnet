@@ -48,11 +48,14 @@ jobs:
         needs: Download-Artifact
 
         steps:
-          - uses: actions/checkout@v3
-            with:
-              website-name: Deploy-to-IIS
-              # shell: pwsh
-              source-path: D:\app-dotnet\app-dotnet\bin\Release\net6.0\publish
+          - uses: Warxgroup/iis-web-deploy@v1
+             with:
+              - name: Deploy to IIS
+              - package: build.zip
+
+              
+        
+         
               
           
        
