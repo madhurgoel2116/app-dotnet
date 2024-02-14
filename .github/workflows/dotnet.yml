@@ -48,10 +48,11 @@ jobs:
         needs: Download-Artifact
 
         steps:
-          - uses: Warxgroup/iis-web-deploy@v1
+          - uses: actions/checkout@v3
             with:
                name: Deploy to IIS
-               package: "build.zip"
+               package: build.zip
+               
 
               
         
