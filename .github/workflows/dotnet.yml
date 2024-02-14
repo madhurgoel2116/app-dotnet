@@ -33,14 +33,14 @@ jobs:
         path: /home/runner/work/app-dotnet/app-dotnet/bin/Debug/net6.0
 
 
-    - name: Build with dotnet
-      shell: cmd
-      run: dotnet build-configuration Release
+    # - name: Build with dotnet
+    #   shell: cmd
+    #   run: dotnet build-configuration Release
 
-    - name: dotnet publish
-      shell: cmd
-      run: |
-        dotnet publish -c Release-o.\myapp
+    # - name: dotnet publish
+    #   shell: cmd
+    #   run: |
+    #     dotnet publish -c Release-o.\myapp
         
     - name: Deploy-to-IIS
       shell: cmd
