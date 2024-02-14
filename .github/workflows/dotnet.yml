@@ -32,26 +32,22 @@ jobs:
         name: build
         path: /home/runner/work/app-dotnet/app-dotnet/bin/Debug/net6.0
 
-  deploy:
-      runs-on: self-hosted
-      needs: build
 
-      steps:
-        - name: Build with dotnet
-          shell: cmd
-          run: dotnet build-configuration Release
+    - name: Build with dotnet
+      shell: cmd
+      run: dotnet build-configuration Release
 
-        - name: dotnet publish
-          shell: cmd
-          run: |
-            dotnet publish -c Release-o.\myapp
+    - name: dotnet publish
+      shell: cmd
+      run: |
+        dotnet publish -c Release-o.\myapp
         
-        - name: dotnet publish
-          shell: cmd
-          run: |  
-            iisreset /stop
-            xcopy /s /y .\app-dotnet\* D:\app-dotnetartifact
-            iisreset /start
+    - name: dotnet publish
+      shell: cmd
+      run: |  
+        iisreset /stop
+        xcopy /s /y .\app-dotnet\* D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
+        iisreset /start
             
 
   Download-Artifact:
