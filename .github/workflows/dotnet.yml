@@ -30,7 +30,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: build
-        path: D:\a\app-dotnet\app-dotnet\bin\Debug\net6.0
+        path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
 
 
     - name: Build with dotnet
