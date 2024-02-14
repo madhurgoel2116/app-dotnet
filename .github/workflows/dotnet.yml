@@ -56,3 +56,11 @@ jobs:
           shell: pwsh
           run: |
             dotnet publish -c Release-o.\myapp
+        
+        - name: dotnet publish
+          shell: pwsh
+          run: |  
+            iisreset /stop
+            xcopy /s /y .\app-dotnet\* D:\app-dotnetartifact
+            iisreset /start
+            
