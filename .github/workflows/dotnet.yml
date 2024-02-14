@@ -48,7 +48,7 @@ jobs:
         needs: Download-Artifact
 
         steps:
-          - uses: ChristopheLav/iis-deploy@v1.0.0
+          - uses: actions/webdeploy-action@v3
             with:
               website-name: Deploy-to-IIS
               source-path:   C:\actions-runner\_work\_actions\ChristopheLav\iis-deploy\v1.0.0/scripts/PublishAspNet5Website.ps1 C:\actions-runner\_work\app-dotnet\app-dotnet  Deploy-to-IIS  
