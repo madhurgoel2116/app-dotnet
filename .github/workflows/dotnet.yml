@@ -49,9 +49,9 @@ jobs:
 
         steps:
           - uses: Warxgroup/iis-web-deploy@v1
-             with:
-              - name: Deploy to IIS
-              - package: build.zip
+            with:
+               name: Deploy to IIS
+               package: "build.zip"
 
               
         
