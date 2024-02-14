@@ -33,9 +33,9 @@ jobs:
         path: D:\a\app-dotnet\app-dotnet\bin\Debug\net6.0
 
 
-    # - name: Build with dotnet
-    #   shell: cmd
-    #   run: dotnet build-configuration Release
+    - name: Build with dotnet
+      shell: pwsh
+      run: dotnet build --configuration Release
 
     - name: dotnet publish
       shell: pwsh
