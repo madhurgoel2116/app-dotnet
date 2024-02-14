@@ -8,7 +8,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-
+  workflow_dispatch:
+  
 jobs:
   build:
 
@@ -41,3 +42,17 @@ jobs:
            with:
              name: build
              path: D:\app-dotnetartifact
+
+  deploy:
+      runs-on: self-hosted
+      needs: build
+
+      steps:
+        - name: Build with dotnet
+          shell: pwsh
+          run: dotnet build-configuration Release
+
+        - name: dotnet publish
+          shell: pwsh
+          run: |
+            dotnet publish -c Release-o.\myapp
