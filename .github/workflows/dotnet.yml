@@ -48,11 +48,11 @@ jobs:
         needs: Download-Artifact
 
         steps:
-          - uses: cschleiden/webdeploy-action@v1
+          - uses: actions/checkout@v3
             with:
               website-name: Deploy-to-IIS
-              shell: pwsh
-              source-path:  D:\app-dotnetartifact\publish\wwwroot
+              # shell: pwsh
+              source-path: D:\app-dotnet\app-dotnet\bin\Release\net6.0\publish
               
           
        
