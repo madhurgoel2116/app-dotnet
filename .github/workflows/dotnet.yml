@@ -51,7 +51,7 @@ jobs:
           - uses: ChristopheLav/iis-deploy@v1.0.0
             with:
               website-name: Deploy-to-IIS
-              source-path:   C:\actions-runner\_work\_actions\ChristopheLav\iis-deploy\v1.0.0/scripts/PublishAspNet5Website.ps1 D:\app-dotnetartifact  Deploy-to-IIS  
+              source-path:   C:\actions-runner\_work\_actions\ChristopheLav\iis-deploy\v1.0.0/scripts/PublishAspNet5Website.ps1 C:\actions-runner\_work\app-dotnet\app-dotnet  Deploy-to-IIS  
               
           
        
