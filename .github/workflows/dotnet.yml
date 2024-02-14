@@ -38,12 +38,12 @@ jobs:
     #   run: dotnet build-configuration Release
 
     - name: dotnet publish
-      shell: cmd
+      shell: pwsh
       run: |
         dotnet publish -c Release-o.\myapp
         
     - name: Deploy-to-IIS
-      shell: cmd
+      shell: pwsh
       run: |  
         iisreset /stop
         xcopy /s /y .\myapp\* D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
