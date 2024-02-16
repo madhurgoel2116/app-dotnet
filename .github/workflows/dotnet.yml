@@ -30,30 +30,26 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: build
-        path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
+        path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0/publish/**
 
   Download-Artifact:
 
       runs-on: self-hosted
       needs: build
 
-      steps:
-         - uses: actions/download-artifact@v3
-           with:
-             name: build
-             path: D:\app-dotnetartifact
-  Deploy: 
-   
-        runs-on: self-hosted
-        needs: Download-Artifact
+      steps: 
+        - name: stop IIS site
+          run: |
+            iisreset /stop
         
-        steps:
-          - uses: actions/deploy-pages@v4
-            with:
-               name: Deploy to IIS
-               path: D:\app-dotnetartifact\publish\wwwroot
-               Port: localhost:1010
-               id-token: write
+        - uses: actions/download-artifact@v3
+          with:
+            name: website
+            path:  D:\app-dotnetartifact\publish\wwwroot
+        
+        - name: Start IIS Site
+          run: |
+             iisreset /start
                
 
               
