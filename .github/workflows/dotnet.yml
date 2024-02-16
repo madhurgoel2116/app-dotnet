@@ -49,10 +49,11 @@ jobs:
         
 
         steps:
-          - uses: actions/checkout@v3
+          - uses: iis/checkout@v3
             with:
                name: Deploy to IIS
-               
+               path: MADHURGOEL\Sites\gh-actions-website.com
+               Port: 1010
                
 
               
