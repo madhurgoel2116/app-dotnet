@@ -44,8 +44,8 @@ jobs:
         
         - uses: actions/download-artifact@v3
           with:
-            name: website
-            path:  D:\app-dotnetartifact\publish\wwwroot
+            name: build
+            path:  D:\app-dotnetartifact\publish
         
         - name: Start IIS Site
           run: |
