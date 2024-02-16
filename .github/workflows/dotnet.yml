@@ -47,13 +47,13 @@ jobs:
         runs-on: self-hosted
         needs: Download-Artifact
         
-
         steps:
           - uses: actions/deploy-pages@v4
             with:
                name: Deploy to IIS
                path: D:\app-dotnetartifact\publish\wwwroot
                Port: localhost:1010
+               id-token: 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
                
 
               
