@@ -1,51 +1,60 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: .NET
+name: dotnet
 on:
   push:
-    branches: [ "main" ]
+    branches: main
   pull_request:
-    branches: [ "main" ]
+    branches: none # [ main ]
+    
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   
 jobs:
-  build:
+  build-dotnet-app:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app-dotnet
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - name: Restore dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --no-restore
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
+      - name: Publish
+        run: dotnet publish -c Release
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: website
+          path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
+          if-no-files-found: error
+          
+  download-artifact:
+    runs-on: self-hosted
+    # if: ${{ always() }}
+    needs: [build-dotnet-app]
+    
+    steps: 
+    - name: stop IIS site
+      run: |
+        iisreset /stop
+        
+    - uses: actions/download-artifact@v3
       with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-    - name: Publish
-      run: dotnet publish -c Release
-    - uses: actions/upload-artifact@v3
-      with:
-       name: build
-       path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
+        name: website
+        path:  D:\app-dotnet\app-dotnet
+        
+    - name: Start IIS Site
+      run: |
+         iisreset /start
+    
 
-  Download-Artifact:
-      runs-on: self-hosted
-      needs: build
-      steps: 
-        - name: stop IIS site
-          run: |
-            iisreset /stop
-        - uses: actions/download-artifact@v3
-          with:
-            name: build
-            path:  D:\app-dotnet\app-dotnet\bin\Release\net6.0\publish
-        - name: Start IIS Site
-          run: |
-            iisreset /start
-               
 
               
         
