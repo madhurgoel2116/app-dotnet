@@ -8,7 +8,7 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  workflow_dispatch:
+  # workflow_dispatch:
   
 jobs:
   build:
@@ -49,7 +49,7 @@ jobs:
         
 
         steps:
-          - uses: iis/checkout@v3
+          - uses: actions/webdeploy-action@v3
             with:
                name: Deploy to IIS
                path: MADHURGOEL\Sites\gh-actions-website.com
