@@ -52,8 +52,8 @@ jobs:
           - uses: actions/webdeploy-action@v3
             with:
                name: Deploy to IIS
-               path: MADHURGOEL\Sites\gh-actions-website.com
-               Port: 1010
+               path: D:\app-dotnetartifact\publish\wwwroot
+               Port: localhost:1010
                
 
               
