@@ -2,7 +2,6 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
 name: .NET
-
 on:
   push:
     branches: [ "main" ]
@@ -12,9 +11,7 @@ on:
   
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -27,29 +24,27 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Publish
+      run: dotnet publish -c Release
     - uses: actions/upload-artifact@v3
       with:
-        name: build
-        path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0/publish/**
+       name: build
+       path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0/publish
 
   Download-Artifact:
-
       runs-on: self-hosted
       needs: build
-
       steps: 
         - name: stop IIS site
           run: |
             iisreset /stop
-        
         - uses: actions/download-artifact@v3
           with:
             name: build
-            path:  D:\app-dotnetartifact\publish
-        
+            path:  D:\app-dotnet\app-dotnet\bin\Release\net6.0\publish
         - name: Start IIS Site
           run: |
-             iisreset /start
+            iisreset /start
                
 
               
