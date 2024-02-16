@@ -46,12 +46,13 @@ jobs:
    
         runs-on: self-hosted
         needs: Download-Artifact
+        
 
         steps:
           - uses: actions/checkout@v3
             with:
                name: Deploy to IIS
-               website: Start on Port 1010
+               
                
 
               
