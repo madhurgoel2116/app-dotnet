@@ -51,7 +51,7 @@ jobs:
           - uses: actions/checkout@v3
             with:
                name: Deploy to IIS
-               package: build.zip
+               website: Start on Port 1010
                
 
               
