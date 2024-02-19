@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
+          path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0/publish/
           # if-no-files-found: error
           
   download-artifact:
@@ -43,7 +43,7 @@ jobs:
     - uses: actions/download-artifact@v3
       with:
         name: build
-        path: D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
+        path: D:\app-dotnet\app-dotnet\wwwroot
         
     - name: Start IIS Site
       run: |
