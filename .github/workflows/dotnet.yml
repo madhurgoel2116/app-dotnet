@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0/publish
+          path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
           # if-no-files-found: error
           
   download-artifact:
