@@ -1,20 +1,15 @@
-name: dotnet
+name: .Net
 on:
   push:
    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
-    
-  # # Allows you to run this workflow manually from the Actions tab
-  # workflow_dispatch:
-  
+      
 jobs:
   build-dotnet-app:
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: app-dotnet
+  
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -27,33 +22,32 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-build --verbosity normal
-      - name: Publish
-        run: dotnet publish -c Release
+      # - name: Publish
+      #   run: dotnet publish -c Release
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: website
-          path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0/publish/
+          name: build
+          path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0/publish
           # if-no-files-found: error
           
   download-artifact:
     runs-on: self-hosted
-    # if: ${{ always() }}
     needs: build-dotnet-app
     
     steps: 
     - name: stop IIS site
       run: |
-        iisreset /stop
+       iisreset /stop
         
     - uses: actions/download-artifact@v3
       with:
-        name: website
-        path:  D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
+        name: build
+        path: D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
         
     - name: Start IIS Site
       run: |
-         iisreset /start
+       iisreset /start
     
 
 
