@@ -38,7 +38,7 @@ jobs:
     steps: 
     - name: stop IIS site
       run: |
-       IISReset /stop
+       IISReset MADHOR GOEL /stop
         
     - uses: actions/download-artifact@v3
       with:
@@ -47,7 +47,7 @@ jobs:
         
     - name: Start IIS Site
       run: |
-       IISReset /start
+       IISReset MADHOR GOEL /start
     
 
 
