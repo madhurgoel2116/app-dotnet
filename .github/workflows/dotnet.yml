@@ -1,15 +1,17 @@
-name: .Net
+name: Email Approval Workflow
+
 on:
-  push:
+push:
    branches: [ "main" ]
-  pull_request:
+pull_request:
     branches: [ "main" ]
-  workflow_dispatch:
-      
+ email:
+    types: [opened]
+
 jobs:
-  build-dotnet-app:
+  approve_email:
     runs-on: ubuntu-latest
-  
+    
     steps:
       - uses: actions/checkout@v3
       - name: Setup .NET
@@ -22,38 +24,36 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-build --verbosity normal
-      # - name: Publish
-      #   run: dotnet publish -c Release
-      - name: Upload a Build Artifact
+      - name: Check if email is from approved user
+        id: approve_check
+        run: |
+          if [[ "${{ github.event.sender }}" == "<GitHub Username of Approved Sender>" ]]; then
+            echo "::set-output name=approved::true"
+          else
+            echo "::set-output name=approved::false"
+          fi
+
+      - name: Notify user if email is approved
+        if: steps.approve_check.outputs.approved == 'true'
+        run: |
+          echo "Email from ${GITHUB_ACTOR} approved."
+          echo "You can now proceed with further actions."
+          
+          # You can implement further actions here like sending a notification or triggering another workflow.
+          
+      - name: Fail workflow if email is not approved
+        if: steps.approve_check.outputs.approved == 'false'
+        run: |
+          echo "Email from ${GITHUB_ACTOR} not approved. Aborting workflow."
+          exit 1
+          
+  build_artifacts:
+    needs: [approve_email]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Artifacts
+        # Your build steps go here
         uses: actions/upload-artifact@v3
         with:
           name: build
           path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
-          # if-no-files-found: error
-          
-  download-artifact:
-    runs-on: self-hosted
-    needs: build-dotnet-app
-    
-    steps: 
-    - name: stop IIS site
-      run: |
-       IISReset /stop
-        
-    - uses: actions/download-artifact@v3
-      with:
-        name: build
-        path: D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
-        
-    - name: Start IIS Site
-      run: |
-       IISReset /start
-    
-
-
-              
-        
-         
-              
-          
-       
