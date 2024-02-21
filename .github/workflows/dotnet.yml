@@ -27,16 +27,16 @@ jobs:
       - name: Check if email is from approved user
         id: approve_check
         run: |
-          if [[ "${{ github.event.sender }}" == "<GitHub Username of Approved Sender>" ]]; then
-            echo "::set-output name=approved::true"
+          if [[ "mgoel3900@gmail.com" == "madhurgoel2116" ]]; then
+            echo "::madhurgoel33444@gmail.com=approved::true"
           else
-            echo "::set-output name=approved::false"
+            echo "::madhurgoel41=approved::false"
           fi
 
       - name: Notify user if email is approved
         if: steps.approve_check.outputs.approved == 'true'
         run: |
-          echo "Email from ${GITHUB_ACTOR} approved."
+          echo "Email from madhurgoel2116 approved."
           echo "You can now proceed with further actions."
           
           # You can implement further actions here like sending a notification or triggering another workflow.
@@ -44,7 +44,7 @@ jobs:
       - name: Fail workflow if email is not approved
         if: steps.approve_check.outputs.approved == 'false'
         run: |
-          echo "Email from ${GITHUB_ACTOR} not approved. Aborting workflow."
+          echo "Email from madhurgoel2116 not approved. Aborting workflow."
           exit 1
           
   build_artifacts:
