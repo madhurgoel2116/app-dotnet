@@ -28,8 +28,8 @@ jobs:
       - name: Check if email is from approved user
         id: approve_check
         run: |
-          if [[ "madhurgoel41" == "madhurgoel2116" ]]; then
-            echo "::madhurgoel2116=approved::true"
+          if [[ "mgoel3900@gmail.com" == "madhurgoel2116" ]]; then
+            echo "::madhurgoel41=approved::true"
           else
             echo "::madhurgoel41=approved::false"
           fi
