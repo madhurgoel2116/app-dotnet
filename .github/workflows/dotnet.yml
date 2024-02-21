@@ -1,12 +1,12 @@
 name: Email Approval Workflow
 
 on:
-# push:
-#    branches: [ "main" ]
-# pull_request:
-#     branches: [ "main" ]
- email:
-    types: [opened]
+ push:
+   branches: [ "main" ]
+ pull_request:
+    branches: [ "main" ]
+ # email:
+ #    types: [opened]
 
 jobs:
   approve_email:
