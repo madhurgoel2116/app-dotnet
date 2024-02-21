@@ -28,7 +28,7 @@ jobs:
         id: approve_check
         run: |
           if [[ "mgoel3900@gmail.com" == "madhurgoel2116" ]]; then
-            echo "::madhurgoel33444@gmail.com=approved::true"
+            echo "::madhurgoel41=approved::true"
           else
             echo "::madhurgoel41=approved::false"
           fi
