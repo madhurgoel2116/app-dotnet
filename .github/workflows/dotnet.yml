@@ -13,22 +13,23 @@ jobs:
   approve_email:
     runs-on: ubuntu-latest
     steps:
-       - name: Send Email
-         uses: actions/checkout@v1
-         with:
+    - name: send email
+      with:
+       from-email: mgoel3900@gmail.com
+       to-email: madhurgoel33444@gmail.com
+       username: madhurgoel2116
+       password: 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
+       subject: Test Email
+       body: This is a test email sent from GitHub Actions.
+       html: |
+           <h1>This is a test email</h1>
+           <p>Test Paragraph</p>
           # server: gh-actions-website.com
           # smtp-port: 1010
           # smtp-secure: true
-          from-email: mgoel3900@gmail.com
+          
           # filter: [requested,succeeded,failed]
-          to-email: madhurgoel33444@gmail.com
-          username: madhurgoel2116
-          password: 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
-          subject: Test Email
-          body: This is a test email sent from GitHub Actions.
-          html: |
-           <h1>This is a test email</h1>
-           <p>Test Paragraph</p>
+          
           
   build-dotnet-app:
     needs: [approve_email]
