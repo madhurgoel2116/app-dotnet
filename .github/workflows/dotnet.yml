@@ -11,11 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Approval Email
-        uses: sendgrid/email-action@v1  # Replace 'example/send-approval-email-action@v1' with the actual action you intend to use
+        uses: macnev2013/manual-approval@v1.0.18  
         with:
           approvers: madhurgoel2116
           secret: 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
-  # Replace 'EMAIL_SECRET' with the name of your GitHub secret containing the email secret
           minimum-approvals: 1
 
   build-dotnet-app:
