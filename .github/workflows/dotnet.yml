@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Approval Email
-        uses: macnev2013/manual-approval@v1.0.18  
+        uses: macnev2013/manual-approval@v1.0.18
         with:
           approvers: madhurgoel2116
           secret: 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
