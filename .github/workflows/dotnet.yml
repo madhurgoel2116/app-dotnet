@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
        - name: Send Email
-         uses: trstringer/manual-approval@v1.9.0
+         uses: trstringer/manual-approval@v1
          with:
           token: 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
           approvers: madhurgoel2116
