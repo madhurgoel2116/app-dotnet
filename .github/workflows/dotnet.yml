@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
        - name: Send Email
-       - uses: sendgrid/email-action@v1
+       - uses: example/send-approval-email-action@v1
          with:
           approvers: madhurgoel2116
           secret: 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
