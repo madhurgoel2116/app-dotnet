@@ -10,21 +10,28 @@ on:
  workflow_dispatch:
 
 jobs:
-  send_email:
-   runs-on: ubuntu-latest
- 
-   steps:
-     - name: Auto approve
-       uses: hmarr/auto-approve-action@v2.0.0 # Custom action for auto approval already available on marketplace
-        # Perform the auto approve action only when the PR is raised by dependabot
-       if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
-       with:
-          # Create a personal access token and store it under the Secrets section of the particular repository
-          # with the key "GITHUB_ACTIONS_TOKEN"
-        github-token: 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
-   
+  approve_email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: send email
+        with:
+          from-email: mgoel3900@gmail.com
+          to-email: madhurgoel33444@gmail.com
+          username: madhurgoel2116
+          password: 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
+          subject: Test Email
+          body: This is a test email sent from GitHub Actions.
+          html: |
+            <h1>This is a test email</h1>
+            <p>Test Paragraph</p>
+          # server: gh-actions-website.com
+          # smtp-port: 1010
+          # smtp-secure: true
+          # filter: [requested,succeeded,failed]
+          
+          
   build-dotnet-app:
-    needs: [send_email]
+    needs: [approve_email]
     runs-on: ubuntu-latest
   
     steps:
