@@ -1,8 +1,8 @@
 name: Email Approval Workflow
 
 on:
- push:
-   branches: [ "main" ]
+ # push:
+ #   branches: [ "main" ]
  pull_request:
     branches: [ "main" ]
     types: [opened]
@@ -18,11 +18,11 @@ jobs:
           approvers: madhurgoel2116
           secret: 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
           minimum-approvals: 1
-          subject: Test Email
-          body: This is a test email sent from GitHub Actions.
-          html: |
-           <h1>This is a test email</h1>
-           <p>Test Paragraph</p>
+          # subject: Test Email
+          # body: This is a test email sent from GitHub Actions.
+          # html: |
+          #  <h1>This is a test email</h1>
+          #  <p>Test Paragraph</p>
           
   build-dotnet-app:
     needs: [approve_email]
@@ -54,15 +54,15 @@ jobs:
     needs: build-dotnet-app
     
     steps: 
-    # - name: stop IIS site
-    #   run: |
-    #    IISReset /stop
+    - name: stop IIS site
+      run: |
+       IISReset /stop
         
     - uses: actions/download-artifact@v3
       with:
         name: build
         path: D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
         
-    # - name: Start IIS Site
-    #   run: |
-    #    IISReset /start
+    - name: Start IIS Site
+      run: |
+       IISReset /start
