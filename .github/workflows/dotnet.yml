@@ -6,7 +6,7 @@ on:
  pull_request:
     branches: [ "main" ]
  # email:
- #    types: [opened]
+    types: [opened]
  workflow_dispatch:
 
 jobs:
@@ -14,12 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
        - name: Send Email
-         uses: actions/checkout@v3
+         uses: actions/checkout@v1
          with:
-          # smtp-server: gh-actions-website.com
+          # server: gh-actions-website.com
           # smtp-port: 1010
           # smtp-secure: true
           from-email: mgoel3900@gmail.com
+          # filter: [requested,succeeded,failed]
           to-email: madhurgoel33444@gmail.com
           username: madhurgoel2116
           password: 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
