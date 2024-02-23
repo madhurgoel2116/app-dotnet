@@ -1,8 +1,8 @@
 name: Email Approval Workflow
 
 on:
- # push:
- #   branches: [ "main" ]
+ push:
+   branches: [ "main" ]
  pull_request:
     branches: [ "main" ]
     types: [opened]
@@ -16,11 +16,7 @@ jobs:
          uses: trstringer/manual-approval@v1.9.0
          with:
           token: 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
-          approvers: mgoel3900@gmail.com
-          # to: madhurgoel33444@gmail.com
-          # from: mgoel3900@gmail.com
-          # username: madhurgoel2116
-          # password: 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
+          approvers: madhurgoel2116
           subject: Test Email
           body: This is a test email sent from GitHub Actions.
           html: |
