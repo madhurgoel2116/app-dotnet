@@ -13,11 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
        - name: Send Email
-         uses: dawidd6/action-send-mail@v3
+         uses: trstringer/manual-approval@v1.9.0
          with:
           token: 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
-          to: madhurgoel33444@gmail.com
-          from: mgoel3900@gmail.com
+          approvers: mgoel3900@gmail.com
+          # to: madhurgoel33444@gmail.com
+          # from: mgoel3900@gmail.com
           # username: madhurgoel2116
           # password: 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
           subject: Test Email
