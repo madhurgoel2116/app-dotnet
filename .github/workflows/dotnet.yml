@@ -13,10 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
        - name: Send Email
-         uses: trstringer/manual-approval@v1
+       - uses: trstringer/manual-approval@v1
          with:
-          token: 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
+          secret: ${{ github.TOKEN }}
           approvers: madhurgoel2116
+          minimum-approvals: 1
           subject: Test Email
           body: This is a test email sent from GitHub Actions.
           html: |
