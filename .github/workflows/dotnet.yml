@@ -1,11 +1,10 @@
 name: Email Approval Workflow
 
 on:
- push:
-   branches: [ "main" ]
+ # push:
+ #   branches: [ "main" ]
  pull_request:
     branches: [ "main" ]
- # email:
     types: [opened]
  workflow_dispatch:
 
@@ -14,16 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
        - name: Send Email
-         uses: actions/checkout@v1
+         uses: dawidd6/action-send-mail@v3
          with:
-          # server: gh-actions-website.com
-          # smtp-port: 1010
-          # smtp-secure: true
-          from-email: mgoel3900@gmail.com
-          # filter: [requested,succeeded,failed]
-          to-email: madhurgoel33444@gmail.com
-          username: madhurgoel2116
-          password: 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
+          token: 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
+          to: madhurgoel33444@gmail.com
+          from: mgoel3900@gmail.com
+          # username: madhurgoel2116
+          # password: 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
           subject: Test Email
           body: This is a test email sent from GitHub Actions.
           html: |
@@ -60,15 +56,15 @@ jobs:
     needs: build-dotnet-app
     
     steps: 
-    - name: stop IIS site
-      run: |
-       IISReset /stop
+    # - name: stop IIS site
+    #   run: |
+    #    IISReset /stop
         
     - uses: actions/download-artifact@v3
       with:
         name: build
         path: D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
         
-    - name: Start IIS Site
-      run: |
-       IISReset /start
+    # - name: Start IIS Site
+    #   run: |
+    #    IISReset /start
