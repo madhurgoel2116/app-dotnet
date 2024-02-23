@@ -1,35 +1,28 @@
 name: Email Approval Workflow
 
 on:
- # push:
- #   branches: [ "main" ]
- pull_request:
+  pull_request:
     branches: [ "main" ]
     types: [opened]
- workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   approve_email:
     runs-on: ubuntu-latest
     steps:
-       - name: Send Email
-       - uses: example/send-approval-email-action@v1
-         with:
+      - name: Send Approval Email
+        uses: example/send-approval-email-action@v1  # Replace 'example/send-approval-email-action@v1' with the actual action you intend to use
+        with:
           approvers: madhurgoel2116
-          secret: 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
+          secret: ${{ secrets.EMAIL_SECRET }}  # Replace 'EMAIL_SECRET' with the name of your GitHub secret containing the email secret
           minimum-approvals: 1
-          # subject: Test Email
-          # body: This is a test email sent from GitHub Actions.
-          # html: |
-          #  <h1>This is a test email</h1>
-          #  <p>Test Paragraph</p>
-          
+
   build-dotnet-app:
     needs: [approve_email]
     runs-on: ubuntu-latest
-  
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
@@ -40,29 +33,21 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-build --verbosity normal
-      # - name: Publish
-      #   run: dotnet publish -c Release
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
         with:
           name: build
           path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
-          # if-no-files-found: error
-          
+
   download-artifact:
     runs-on: self-hosted
     needs: build-dotnet-app
-    
     steps: 
-    - name: stop IIS site
-      run: |
-       IISReset /stop
-        
-    - uses: actions/download-artifact@v3
-      with:
-        name: build
-        path: D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
-        
-    - name: Start IIS Site
-      run: |
-       IISReset /start
+      - name: Stop IIS site
+        run: IISReset /stop
+      - uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
+      - name: Start IIS Site
+        run: IISReset /start
