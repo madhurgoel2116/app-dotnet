@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: trstringer/manual-approval@v1
         with:
-          secret: ${{ github.TOKEN }}
+          secret: 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
           approvers: madhurgoel2116,madhurgoel41
           minimum-approvals: 1
       - name: Checkout code
