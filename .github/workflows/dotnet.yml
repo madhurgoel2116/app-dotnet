@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: trstringer/manual-approval@v1
         with:
-          secret: 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
+          secret: ${{ secrets.GITHUB_TOKEN }}
           approvers: madhurgoel2116,madhurgoel41
           minimum-approvals: 1
       - uses: actions/checkout@v3
