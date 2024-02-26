@@ -18,6 +18,7 @@ jobs:
           secret: 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
           approvers: madhurgoel2116
           minimum-approvals: 1
+      - run: echo i am deploying
 
   build-dotnet-app:
     needs: [approve_email]
