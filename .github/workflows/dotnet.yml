@@ -13,7 +13,7 @@ jobs:
       run:
         working-directory: app-dotnet
     steps:
-      - uses: actions/manual-approval@v1.9.0
+      - uses: trstringer/manual-approval@v1.9.0
         with:
           # secret: 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
           approvers: madhurgoel41,madhurgoel2116
