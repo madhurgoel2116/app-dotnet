@@ -16,7 +16,7 @@ jobs:
       - uses: trstringer/manual-approval@v1.9.0
         with:
           secret: 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
-          approvers: madhurgoel2116
+          approvers: madhurgoel2116,madhurgoel41
           minimum-approvals: 1
           
  build-dotnet-app:
