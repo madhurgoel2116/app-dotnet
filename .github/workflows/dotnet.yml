@@ -17,8 +17,8 @@ jobs:
     steps:
       - uses: trstringer/manual-approval@v1
         with:
-          secret: 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
-          approvers: madhurgoel41,madhurgoel2116
+          secret: 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
+          approvers: madhurgoel2116,madhurgoel41
           minimum-approvals: 1
       - uses: actions/checkout@v3
       - name: Setup .NET
