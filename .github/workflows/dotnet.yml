@@ -18,6 +18,7 @@ jobs:
           secret: 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
           approvers: madhurgoel41
           minimum-approvals: 1
+          exclude-workflow-initiator-as-approver: True
       # - name: Checkout code
       - uses: actions/checkout@v3
       - name: Setup .NET
