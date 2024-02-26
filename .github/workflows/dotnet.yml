@@ -8,10 +8,13 @@ on:
 
 jobs:
   approve_email:
-    runs-on: ubuntu-latest
-    environment:
-      name: Production
-
+   runs-on: ubuntu-latest
+   environment:
+       name: Production
+       
+   steps:
+      - name: approve_email
+       
   build-dotnet-app:
     needs: [approve_email]
     runs-on: ubuntu-latest
