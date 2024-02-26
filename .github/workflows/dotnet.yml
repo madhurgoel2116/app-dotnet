@@ -18,6 +18,9 @@ jobs:
           secret: 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
           approvers: madhurgoel41,madhurgoel2116
           minimum-approvals: 1
+          issue-title: "Deploying v1.3.5 to prod from staging"
+          issue-body: "Please approve or deny the deployment of version v1.3.5."
+          exclude-workflow-initiator-as-approver: false
           
       # - name: Checkout code
       - uses: actions/checkout@v3
