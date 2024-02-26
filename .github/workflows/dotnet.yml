@@ -9,13 +9,8 @@ on:
 jobs:
   approve_email:
     runs-on: ubuntu-latest
-    steps:
-      - name: Send Approval Email
-        uses: trstringer/manual-approval@v1.9.0
-        with:
-          approvers: madhurgoel2116
-          secret: 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
-          minimum-approvals: 1
+    environment:
+      name: Production
 
   build-dotnet-app:
     needs: [approve_email]
