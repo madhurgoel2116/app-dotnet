@@ -2,18 +2,18 @@ name: Email Approval Workflow
 
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     types: [opened]
   workflow_dispatch:
 
 jobs:
   approve_email:
-   runs-on: ubuntu-latest
-   environment:
-       name: Production
-   steps:
-     - name: approve_email
-       
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+    steps:
+      - name: approve_email
+
   build-dotnet-app:
     needs: [approve_email]
     runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ jobs:
   download-artifact:
     runs-on: self-hosted
     needs: build-dotnet-app
-    steps: 
+    steps:
       - name: Stop IIS site
         run: IISReset /stop
       - uses: actions/download-artifact@v3
