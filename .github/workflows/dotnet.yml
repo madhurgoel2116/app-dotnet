@@ -7,21 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  approve_email:
-    runs-on: ubuntu-latest
-    environment:
-      name: Production
-    steps:
-      - name: email
-      - uses: trstringer/manual-approval@v1.9.0
-        with:
-          secret: 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
-          approvers: madhurgoel2116
-          minimum-approvals: 1
-      - run: echo i am deploying
-
-  build-dotnet-app:
-    needs: [approve_email]
+ build-dotnet-app:
+    # needs: [approve_email]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -36,13 +23,26 @@ jobs:
         run: dotnet build --no-restore
       - name: Test
         run: dotnet test --no-build --verbosity normal
+
+ approve_email:
+    runs-on: ubuntu-latest
+    environment:
+      name: Production
+    steps:
+      - name: email
+      - uses: trstringer/manual-approval@v1.9.0
+        with:
+          secret: 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
+          approvers: madhurgoel2116
+          minimum-approvals: 1
+      
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
         with:
           name: build
           path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
 
-  download-artifact:
+ download-artifact:
     runs-on: self-hosted
     needs: build-dotnet-app
     steps:
