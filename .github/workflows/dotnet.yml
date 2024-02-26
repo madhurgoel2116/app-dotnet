@@ -1,28 +1,21 @@
 name: Email Approval Workflow
-
 on:
+  push:
+    branches: main
   pull_request:
     branches: ["main"]
-    types: [opened]
+   
   workflow_dispatch:
 
-jobs:
- approve_email:
-    runs-on: ubuntu-latest
-    environment:
-      name: Production
-    steps:
-      - name: email
-      - uses: trstringer/manual-approval@v1.9.0
-        with:
-          secret: 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
-          approvers: madhurgoel2116,madhurgoel41
-          minimum-approvals: 1
-          
+jobs:       
  build-dotnet-app:
-    needs: [approve_email]
     runs-on: ubuntu-latest
     steps:
+      - uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          approvers: srajib429,madhurgoel2116,madhurgoel41
+          minimum-approvals: 1
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Setup .NET
@@ -39,7 +32,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build
-          path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
+          path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0/publish/**
 
  download-artifact:
     runs-on: self-hosted
