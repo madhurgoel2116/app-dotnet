@@ -11,8 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Production
-    # steps:
-    #   - name: email
+    steps:
+      - name: email
+      - uses: trstringer/manual-approval@v1
+        with:
+          secret: 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
+          approvers: madhurgoel2116
+          minimum-approvals: 1
 
   build-dotnet-app:
     needs: [approve_email]
