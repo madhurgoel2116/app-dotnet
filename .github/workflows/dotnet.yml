@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Production
-    steps:
-      - name: approve_email
+    # steps:
+    #   - name: email
 
   build-dotnet-app:
     needs: [approve_email]
