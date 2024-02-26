@@ -10,6 +10,9 @@ on:
 jobs:       
  build-dotnet-app:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app-dotnet
     steps:
       - uses: trstringer/manual-approval@v1
         with:
