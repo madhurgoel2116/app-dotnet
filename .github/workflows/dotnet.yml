@@ -1,24 +1,25 @@
-name: Email Approval Workflow
+name: dotnetcoreManualApproval2
 on:
   push:
     branches: main
   pull_request:
-    branches: none 
+    branches: none # [ main ]
+    
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
-jobs:       
- build-dotnet-app:
+  
+jobs:
+  build-dotnet-app:
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: app-dotnet
+    defaults:
+      run:
+        working-directory: app-dotnet
     steps:
-      - uses: trstringer/manual-approval@v1.9.0
+      - uses: trstringer/manual-approval@v1
         with:
-          secret: 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
-          approvers: madhurgoel41,madhurgoel2116
-          minimum-approvals: 1         
-      # - name: Checkout code
+          secret: ${{ github.TOKEN }}
+          approvers: srajib429,madhurgoel2116
+          minimum-approvals: 1
       - uses: actions/checkout@v3
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
@@ -29,22 +30,31 @@ jobs:
       - name: Build
         run: dotnet build --no-restore
       - name: Test
-        run: dotnet test --no-build --verbosity normal     
+        run: dotnet test --no-build --verbosity normal
+      - name: Publish
+        run: dotnet publish -c Release
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: build
+          name: website
           path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0/publish
-
- download-artifact:
+          if-no-files-found: error
+          
+  download-artifact:
     runs-on: self-hosted
-    needs: build-dotnet-app
-    steps:
-      - name: Stop IIS site
-        run: IISReset /stop
-      - uses: actions/download-artifact@v3
-        with:
-          name: build
-          path: D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
-      - name: Start IIS Site
-        run: IISReset /start
+    # if: ${{ always() }}
+    needs: [build-dotnet-app]
+    
+    steps: 
+    - name: stop IIS site
+      run: |
+        iisreset /stop
+        
+    - uses: actions/download-artifact@v3
+      with:
+        name: website
+        path: D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
+        
+    - name: Start IIS Site
+      run: |
+         iisreset /start
