@@ -20,8 +20,8 @@ jobs:
           secret: ${{ secrets.GITHUB_TOKEN }}
           approvers: madhurgoel2116,madhurgoel41
           minimum-approvals: 1
-          permissions: write-all
-          issue: write
+          issue-title: Manual approval required for workflow run 8060199949
+          issue-Body: Workflow is pending manual review.
       - uses: actions/checkout@v3
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
