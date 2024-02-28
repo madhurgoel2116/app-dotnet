@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: website
-          path: /home/runner/work/app-dotnet/app-dotnet/bin/Release/net6.0
+          path: /home/runner/work/app-dotnet/app-dotnet/app-dotnet
           if-no-files-found: error
           
   download-artifact:
