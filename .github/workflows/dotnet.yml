@@ -52,7 +52,7 @@ jobs:
         
     - uses: actions/download-artifact@v3
       with:
-        name: website
+        name: build
         path: D:\app-dotnet\app-dotnet\wwwroot\gh-actions-website.com
         
     - name: Start IIS Site
