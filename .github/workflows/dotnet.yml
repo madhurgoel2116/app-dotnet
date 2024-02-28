@@ -16,8 +16,6 @@ jobs:
         working-directory: app-dotnet
     steps:
       - uses: trstringer/manual-approval@v1
-      - env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           secret: ${{ secrets.GITHUB_TOKEN }}
           approvers: madhurgoel2116,madhurgoel41
